@@ -1,38 +1,195 @@
-.App {
-  text-align: center;
+html, body, p, span, input, select, label, h1, h2, h3, h4, h5, h6, ul, li, button {
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+    font-weight: 400;
+    font-family: 'Inter';
+    src: local('Inter'), url(assets/Font/Inter-Regular.ttf) format('truetype')
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Caro */
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.play__zone {
+    width: 80%;
+    position: relative;
 }
 
-.App-link {
-  color: #61dafb;
+.info {
+    width: 20%;
+    border-left: 1px solid lightgray;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    /* background-color: lightgrey; */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.info__input {
+    width: calc(100% - 40px);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.info__title {
+    border-bottom: 1px solid lightgray;
+}
+
+.player__input {
+    width: calc(50% - 20px);
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.player__input:last-child {
+    margin-right: 0px;
+    margin-left: 20px;
+}
+
+.player__input>input {
+    width: calc(100% - 20px);
+    margin: 0px;
+    padding: 0px 10px;
+    margin-top: 10px;
+    height: 30px;
+    text-transform: capitalize;
+}
+
+.start {
+    margin-top: auto;
+    width: calc(100% - 40px);
+    padding: 0px 20px;
+    margin-bottom: 50px;
+}
+
+.start>button {
+    width: 100%;
+    height: 40px;
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.start>button:hover {
+    background-color: #006adc;
+}
+
+.time {
+    width: 100%;
+}
+
+.time>span {
+    font-size: 42px;
+    font-weight: 700px;
+}
+
+/* Playzone */
+.play__zone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.box {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.row {
+    display: flex;
+}
+
+.step {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.stepRow-box {
+    flex: 1;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: capitalize;
+}
+
+.stepRow-box>div {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.stepRow-box>span {
+    text-align: left;
+}
+
+.stepRow {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.step__title {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.anti {
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    opacity: 0.5;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.modal {
+    width: 300px;
+    height: 100px;
+    padding: 20px;
+    border-radius: 10px;
+    position: absolute;
+    top: 200px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal>span {
+    margin-bottom: 10px;
 }
