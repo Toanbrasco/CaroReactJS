@@ -4,10 +4,7 @@ import './App.css';
 function App() {
     const [numWidth, setNumWidth] = useState(30)
     const [numHeight, setNumHeight] = useState(30)
-    console.log(`=> numHeight`, numHeight)
-    console.log(`=> numWidth`, numWidth)
     const [arr, setArr] = useState([])
-    console.log(`=> arr`, arr)
     const [loading, setLoading] = useState(true)
     const [refesh, setRefesh] = useState(0)
     const [player1Step, setPlayer1Step] = useState(0)
@@ -22,7 +19,17 @@ function App() {
     const [minute, setMinute] = useState(20)
     const [second, setSecond] = useState(0)
     const [stop, setStop] = useState(false)
+    const [sizeBox, setSizeBox] = useState(20)
+    const [playing, setPlaying] = useState(false)
 
+    useEffect(() => {
+        if (numWidth >= 50) {
+            setSizeBox(15)
+        }
+        if (numWidth >= 100) {
+            setSizeBox(10)
+        }
+    }, [numWidth, numHeight])
     useEffect(() => {
         let coundDown
         if (stop) {
@@ -75,6 +82,18 @@ function App() {
         setSecond(0)
         setAnti(true)
         setStop(true)
+        setPlaying(true)
+    }
+    const pauseGame = () => {
+        setStop(!stop)
+        setAnti(!anti)
+    }
+    const EndGame = () => {
+        setMinute(20)
+        setSecond(0)
+        setAnti(false)
+        setStop(false)
+        setPlaying(false)
     }
     // Player 1 : X
     // Player 2 : O
@@ -182,9 +201,6 @@ function App() {
             }
         }
     }
-    // useEffect(() => {
-    //     checkPlayerWin()
-    // }, [player1Step, player2Step])
     useEffect(() => {
         RenderTable()
         setLoading(false)
@@ -202,9 +218,12 @@ function App() {
                             <div key={`row__${indexRow}`} className='row'>
                                 {items.map((item, indexCol) =>
                                     <div key={`col__${indexCol}`} className='box'
-                                        style={{ backgroundColor: item === 'X' ? '#dc3545' : item === 'O' ? '#007bff' : 'white', color: 'white' }}
+                                        style={{
+                                            backgroundColor: item === 'X' ? '#dc3545' : item === 'O' ? '#007bff' : 'white',
+                                            color: 'white', height: sizeBox, width: sizeBox, lineHeight: `${sizeBox}px`
+                                        }}
                                         onClick={() => handleBox(indexRow, indexCol)}>
-                                        <span>{item}</span>
+                                        <span style={{ fontSize: `${sizeBox}px` }}>{item}</span>
                                     </div>
                                 )}
                             </div>
@@ -218,7 +237,7 @@ function App() {
                             winner.length !== 0 ?
                                 <>
                                     <span>Người chiến thắng là {winner}</span>
-                                    <span>Thời gian của ván đấu là: {minute}:{second === 0 ? '00' : second}</span>
+                                    <span>Thời gian của ván đấu là: {19 - minute === 0 ? '00' : 19 - minute}:{second === 0 ? '00' : 60 - second}</span>
                                 </>
                                 : <span>Hoà</span>
                         }
@@ -236,11 +255,11 @@ function App() {
                     <div className='info__input'>
                         <div className='player__input'>
                             <label htmlFor="">Player 1</label>
-                            <input type="text" defaultValue={playerName1} onChange={(e) => setPlayerName1(e.target.value)} disabled={anti} />
+                            <input type="text" defaultValue={playerName1} onChange={(e) => setPlayerName1(e.target.value)} disabled={playing} />
                         </div>
                         <div className='player__input'>
                             <label htmlFor="">Player 2</label>
-                            <input type="text" defaultValue={playerName2} onChange={(e) => setPlayerName2(e.target.value)} disabled={anti} />
+                            <input type="text" defaultValue={playerName2} onChange={(e) => setPlayerName2(e.target.value)} disabled={playing} />
                         </div>
 
                     </div>
@@ -250,12 +269,12 @@ function App() {
                         </div>
                         <div className="stepRow-box">
                             <span >Hàng ngang: </span>
-                            <input style={{ width: '100px' }} type="number" name='numWidth' defaultValue={numWidth} onBlur={(e) => setNumWidth(e.target.value)} disabled={anti} />
+                            <input style={{ width: '100px' }} type="number" name='numWidth' defaultValue={numWidth} onBlur={(e) => setNumWidth(e.target.value)} disabled={playing} />
 
                         </div>
                         <div className="stepRow-box">
                             <span>Hàng dọc: </span>
-                            <input style={{ width: '100px' }} type="number" name='numHeight' defaultValue={numHeight} onBlur={(e) => setNumHeight(e.target.value)} disabled={anti} />
+                            <input style={{ width: '100px' }} type="number" name='numHeight' defaultValue={numHeight} onBlur={(e) => setNumHeight(e.target.value)} disabled={playing} />
                         </div>
                     </div>
                     <div className='time'>
@@ -288,7 +307,17 @@ function App() {
                             </div>
                         </div>
                     </div>
-                    <div className='start'>
+                    <div className='btn'>
+                        <button onClick={pauseGame} style={{
+                            backgroundColor: 'red', color: 'white',
+                            marginRight: 10, display: playing ? 'block' : 'none'
+                        }}>Pause</button>
+                        <button onClick={EndGame} style={{
+                            backgroundColor: 'red', color: 'white',
+                            marginLeft: playing === 0 ? 10 : 0, display: playing ? 'block' : 'none'
+                        }}>End Match</button>
+                    </div>
+                    <div className='start' style={{ display: !playing ? 'block' : 'none' }}>
                         <button onClick={startGame}>Start Game</button>
                     </div>
                 </div>

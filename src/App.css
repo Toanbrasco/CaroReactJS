@@ -13,7 +13,7 @@ html, body, p, span, input, select, label, h1, h2, h3, h4, h5, h6, ul, li, butto
 /* Caro */
 .container {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -68,7 +68,7 @@ html, body, p, span, input, select, label, h1, h2, h3, h4, h5, h6, ul, li, butto
 }
 
 .start {
-    margin-top: auto;
+    margin-top: 20px;
     width: calc(100% - 40px);
     padding: 0px 20px;
     margin-bottom: 50px;
@@ -99,10 +99,12 @@ html, body, p, span, input, select, label, h1, h2, h3, h4, h5, h6, ul, li, butto
 
 /* Playzone */
 .play__zone {
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 50px 0px;
 }
 
 .col {
@@ -111,11 +113,8 @@ html, body, p, span, input, select, label, h1, h2, h3, h4, h5, h6, ul, li, butto
 }
 
 .box {
-    width: 20px;
-    height: 20px;
     border: 1px solid black;
     text-align: center;
-    line-height: 20px;
     cursor: pointer;
 }
 
@@ -167,7 +166,7 @@ html, body, p, span, input, select, label, h1, h2, h3, h4, h5, h6, ul, li, butto
 
 .anti {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: white;
     opacity: 0.5;
     position: absolute;
@@ -192,4 +191,16 @@ html, body, p, span, input, select, label, h1, h2, h3, h4, h5, h6, ul, li, butto
 
 .modal>span {
     margin-bottom: 10px;
+}
+
+.btn {
+    display: flex;
+    padding: 0px 20px;
+}
+
+.btn>button {
+    flex: 1;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
 }
